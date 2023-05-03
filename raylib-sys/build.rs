@@ -29,8 +29,6 @@ fn build_with_cmake(_src_path: &str) {}
 
 #[cfg(not(feature = "nobuild"))]
 fn build_with_cmake(src_path: &str) {
-    use cmake::build;
-
     // CMake uses different lib directories on different systems.
     // I do not know how CMake determines what directory to use,
     // so we will check a few possibilities and use whichever is present.
