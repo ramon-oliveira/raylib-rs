@@ -47,7 +47,7 @@ fn main() {
     rl.set_target_fps(60);
 
     while !rl.window_should_close() {
-        rl.update_camera(&mut camera, CameraMode::CAMERA_FIRST_PERSON as i32);
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FIRST_PERSON);
 
         let mut d = rl.begin_drawing(&thread);
 
