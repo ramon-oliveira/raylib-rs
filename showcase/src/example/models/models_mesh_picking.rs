@@ -55,8 +55,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
 
     let mut bary = rvec3( 0.0, 0.0, 0.0 );
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FREE); // Set a free camera mode
-
     rl.set_target_fps(60);                   // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     // Main game loop
@@ -65,7 +63,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
         let _ = texture;
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);          // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE);          // Update camera
 
         // Display information about closest hit
         let mut nearestHit = RayCollision::default();
@@ -110,7 +108,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
 
             // Check ray collision against model
             // NOTE: It considers model.transform matrix!
-            meshHitInfo = get_ray_collision_model(ray, &tower);
+            
+            // TODO FIX FUNCTION CALL
+            // meshHitInfo = get_ray_collision_model(ray, &tower, &tower.transform);
 
             if ((meshHitInfo.hit) && (meshHitInfo.distance < nearestHit.distance))
             {

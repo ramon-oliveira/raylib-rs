@@ -33,9 +33,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
     model.materials_mut()[0].maps_mut()[raylib::consts::MaterialMapIndex::MATERIAL_MAP_ALBEDO as usize].texture = *texture.as_ref();         // Set map diffuse texture
     let mapPosition = rvec3( -8.0, 0.0, -8.0 );                   // Define model position
 
-
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_ORBITAL);  // Set an orbital camera mode
-
     rl.set_target_fps(60);                       // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -44,7 +41,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);              // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_ORBITAL);              // Update camera
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -73,7 +70,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
         drop(d);
         if rl.is_key_pressed(crate::EXIT_KEY) {
             // free mouse
-            rl.set_camera_mode(& camera, raylib::consts::CameraMode::CAMERA_FREE);
+            rl.update_camera(&mut camera, CameraMode::CAMERA_FREE);
             unsafe {
                 rl.unload_texture(thread, texture.clone());
                 // Don't need to unload mesh because the model will.

@@ -108,8 +108,6 @@ device.chromaAbCorrection);
     let cube_position = Vector3::zero();
 
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FIRST_PERSON); // Set first person camera mode
-
     rl.set_target_fps(90); // Set our game to run at 90 frames-per-second
                            //--------------------------------------------------------------------------------------
 
@@ -119,7 +117,7 @@ device.chromaAbCorrection);
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera); // Update camera (simulator mode)
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FIRST_PERSON); // Update camera (simulator mode)
 
         //----------------------------------------------------------------------------------
 

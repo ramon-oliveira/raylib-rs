@@ -50,8 +50,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
     // NOTE: bounds are calculated from the original size of the model,
     // if model is scaled on drawing, bounds must be also scaled
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FREE);     // Set a free camera mode
-
     let mut selected = false;          // Selected object flag
 
     rl.set_target_fps(60);               // Set our game to run at 60 frames-per-second
@@ -62,7 +60,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE);
         
         // Load new models/textures on drag&drop
         if (rl.is_file_dropped())
@@ -93,7 +91,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
                 }
             }
 
-            rl.unload_dropped_files();    // Clear internal buffers
+            // rl.unload_dropped_files();    // Clear internal buffers
+            rl.load_dropped_files();    // Clear internal buffers
         }
 
         // Select model on mouse click

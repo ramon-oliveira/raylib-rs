@@ -78,7 +78,7 @@ pub fn run(rl
             //----------------------------------------------------------------------------------
         }
         if rl.is_key_down(crate::EXIT_KEY) {
-            rl.unload_dropped_files();
+            // rl.unload_dropped_files(&dropped_files);
         }
     });
 

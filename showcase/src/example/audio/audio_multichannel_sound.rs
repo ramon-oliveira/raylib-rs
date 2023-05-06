@@ -44,12 +44,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         if rl.is_key_pressed(raylib::consts::KeyboardKey::KEY_ENTER)
             {
 
-                audio.play_sound_multi(&fxWav); // Play a new wav sound instance
+                audio.play_sound(&fxWav); // Play a new wav sound instance
             }
         if rl.is_key_pressed(raylib::consts::KeyboardKey::KEY_SPACE)
             {
 
-                audio.play_sound_multi(&fxOgg); // Play a new ogg sound instance
+                audio.play_sound(&fxOgg); // Play a new ogg sound instance
             }
         //----------------------------------------------------------------------------------
 
@@ -63,7 +63,11 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         d.draw_text("Press SPACE to play new ogg instance!", 200, 120, 20, Color::LIGHTGRAY);
         d.draw_text("Press ENTER to play new wav instance!", 200, 180, 20, Color::LIGHTGRAY);
 
-        d.draw_text(&format!("CONCURRENT SOUNDS PLAYING: {:02}", audio.get_sounds_playing()), 220, 280, 20,Color::RED);
+        let sounds_playing = {
+            audio.is_sound_playing(&fxWav) as usize 
+            + audio.is_sound_playing(&fxOgg) as usize
+        };
+        d.draw_text(&format!("CONCURRENT SOUNDS PLAYING: {:02}", sounds_playing), 220, 280, 20,Color::RED);
 
         //----------------------------------------------------------------------------------
     },

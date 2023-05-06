@@ -53,8 +53,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
 
     let mut currentModel = 0;
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_ORBITAL);  // Set a orbital camera mode
-
     rl.set_target_fps(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -65,7 +63,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
         let _ = texture;
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);      // Update internal camera and our camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_ORBITAL);      // Update internal camera and our camera
 
         if (rl.is_mouse_button_pressed(raylib::consts::MouseButton::MOUSE_BUTTON_LEFT))
         {

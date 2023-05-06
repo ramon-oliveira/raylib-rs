@@ -30,8 +30,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
     let cube_position = Vector3::zero();
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FREE); // Set a free camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
 
@@ -41,7 +39,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera); // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE); // Update camera
         if rl.is_key_down(raylib::consts::KeyboardKey::KEY_Z) {
             camera.target = rvec3(0.0, 0.0, 0.0);
         }

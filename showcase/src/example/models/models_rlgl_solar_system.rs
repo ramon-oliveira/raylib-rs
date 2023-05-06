@@ -42,8 +42,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
      45.0,
     );
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FREE);
-
     let rotationSpeed = 0.2;         // General system rotation speed
 
     let mut earthRotation = 0.0;         // Rotation of earth around itself (days) in degrees
@@ -59,7 +57,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE);
 
         earthRotation += (5.0*rotationSpeed);
         earthOrbitRotation += (365.0/360.0*(5.0*rotationSpeed)*rotationSpeed);

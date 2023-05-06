@@ -65,12 +65,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         d.draw_text(&format!("[{}, {}]", panelScroll.x, panelScroll.y), 4, 4, 20,Color::RED);
 
-        let (view, _) = d.gui_scroll_panel(panelRec, panelContentRec, &panelScroll);
+        let (view, _) = d.gui_scroll_panel(panelRec, Some(rstr!("PLACEHOLDER")), panelContentRec, &panelScroll);
 
         {
 
             let mut d = d.begin_scissor_mode(view.x as i32, view.y as i32, view.width as i32, view.height as i32);
-            d.gui_grid(rrect(panelRec.x + panelScroll.x, panelRec.y + panelScroll.y, panelContentRec.width, panelContentRec.height), 16.0, 3);
+            d.gui_grid(rrect(panelRec.x + panelScroll.x, panelRec.y + panelScroll.y, panelContentRec.width, panelContentRec.height), Some(rstr!("PLACEHOLDER")), 16.0, 3);
         }
 
         if showContentArea
@@ -80,8 +80,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         showContentArea = d.gui_check_box(rrect(565, 80, 20, 20), Some(rstr!("SHOW CONTENT AREA")), showContentArea);
 
-        panelContentRec.width = d.gui_slider_bar(rrect(590, 385, 145, 15), Some(rstr!("WIDTH")), Some(&rstr!("{}", panelContentRec.width)), 1f32, 0f32, 600f32);
-        panelContentRec.height = d.gui_slider_bar(rrect(590, 410, 145, 15), Some(rstr!("HEIGHT")), Some(&rstr!("{}", panelContentRec.height)), 1f32, 0f32, 400f32);
+        panelContentRec.width = d.gui_slider_bar(rrect(590, 385, 145, 15), Some(rstr!("WIDTH")), Some(rstr!("PLACEHOLDER")), 1f32, 0f32, 600f32);
+        panelContentRec.height = d.gui_slider_bar(rrect(590, 410, 145, 15), Some(rstr!("HEIGHT")), Some(rstr!("PLACEHOLDER")), 1f32, 0f32, 400f32);
 
         //----------------------------------------------------------------------------------
     },

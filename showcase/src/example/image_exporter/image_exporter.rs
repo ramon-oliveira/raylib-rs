@@ -104,7 +104,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                 }
             }
 
-            rl.unload_dropped_files();
+            // rl.unload_dropped_files();
+            rl.load_dropped_files();
         }
 
         if btnExport
@@ -203,9 +204,11 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             windowBoxActive = !d.gui_window_box(rrect(windowBoxRec.x, windowBoxRec.y, 220, 190), Some(rstr!("Image Export Options")));
 
             d.gui_label(rrect(windowBoxRec.x + 10.0, windowBoxRec.y + 35.0, 60, 25), Some(rstr!("File format:")));
-            fileFormatActive = d.gui_combo_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 35.0, 130, 25), Some(&rstr!("{}", displayFileFormatTextList)), fileFormatActive);
+            // fileFormatActive = d.gui_combo_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 35.0, 130, 25), Some(&rstr!("{}", displayFileFormatTextList)), fileFormatActive);
+            fileFormatActive = d.gui_combo_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 35.0, 130, 25), Some(rstr!("PLACEHOLDER")), fileFormatActive);
             d.gui_label(rrect(windowBoxRec.x + 10.0, windowBoxRec.y + 70.0, 63, 25), Some(rstr!("Pixel format:")));
-            pixelFormatActive = d.gui_combo_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 70.0, 130, 25), Some(&rstr!("{}", displayPixelFormatTextList)), pixelFormatActive);
+            // pixelFormatActive = d.gui_combo_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 70.0, 130, 25), Some(&rstr!("{}", displayPixelFormatTextList)), pixelFormatActive);
+            pixelFormatActive = d.gui_combo_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 70.0, 130, 25), Some(rstr!("PLACEHOLDER")), pixelFormatActive);
             d.gui_label(rrect(windowBoxRec.x + 10.0, windowBoxRec.y + 105.0, 50, 25), Some(rstr!("File name:")));
             if d.gui_text_box(rrect(windowBoxRec.x + 80.0, windowBoxRec.y + 105.0, 130, 25), &mut fileName, textBoxEditMode)
                 {

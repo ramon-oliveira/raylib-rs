@@ -45,8 +45,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         );
     }
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FIRST_PERSON); // Set a first person camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
 
@@ -56,7 +54,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);                  // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FIRST_PERSON);                  // Update camera
         //----------------------------------------------------------------------------------
 
         // Draw

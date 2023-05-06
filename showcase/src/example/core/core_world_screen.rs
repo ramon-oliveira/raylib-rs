@@ -31,8 +31,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     let  cube_position = Vector3::zero();
     let mut cube_screen_position = rvec2(0.0, 0.0);
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FREE); // Set a free camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
 
@@ -42,7 +40,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera); // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE); // Update camera
 
         // Calculate cube screen space position (with a little offset to be in top)
         cube_screen_position = rl.get_world_to_screen(rvec3(cube_position.x, cube_position.y + 2.5,  cube_position.z), camera);

@@ -40,8 +40,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
     let mapPosition = rvec3( -16.0, 0.0, -8.0 );  // Set model position
     let playerPosition = camera.position;       // Set player position
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FIRST_PERSON);     // Set camera mode
-
     rl.set_target_fps(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
@@ -52,7 +50,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
         //----------------------------------------------------------------------------------
         let oldCamPos = camera.position;    // Store old camera position
 
-        rl.update_camera(&mut camera);      // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FIRST_PERSON);      // Update camera
 
         // Check player collision (we simplify to 2D collision detection)
         let playerPos = rvec2( camera.position.x, camera.position.z );
@@ -111,7 +109,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut
         drop(d);
         if rl.is_key_pressed(crate::EXIT_KEY) {
             // free mouse
-            rl.set_camera_mode(& camera, raylib::consts::CameraMode::CAMERA_FREE);
+            rl.update_camera(&mut camera, CameraMode::CAMERA_FREE);
             unsafe {
                 rl.unload_texture(thread, texture.clone());
                 // Don't need to unload mesh because the model will.

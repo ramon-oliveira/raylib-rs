@@ -376,10 +376,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             let droppedFiles = rl.load_dropped_files();
 
             if (droppedFiles.len() > 0) && droppedFiles[0].ends_with(".rgs") {
-                rl.gui_load_style(Some(&CString::new(droppedFiles[0].clone()).unwrap()));
+                // rl.gui_load_style(Some(&CString::new(droppedFiles[0].clone()).unwrap()));
+                rl.gui_load_style(Some(rstr!("PLACEHOLDER")));
             }
 
-            rl.unload_dropped_files();
+            // rl.unload_dropped_files();
+            rl.load_dropped_files();
         }
 
         //----------------------------------------------------------------------------------
@@ -433,9 +435,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         d.gui_set_style(BUTTON, TEXT_ALIGNMENT as i32, TEXT_ALIGN_CENTER as i32);
 
-        let itext = d.gui_icon_text(RAYGUI_ICON_FILE_SAVE, Some(rstr!("Save File")));
+        let itext = d.gui_icon_text(GuiIconName::ICON_FILE_SAVE, Some(rstr!("Save File")));
         let itext = CString::new(itext).unwrap();
-        if d.gui_button(rrect(25, 255, 125, 30), Some(&itext)) {
+        if d.gui_button(rrect(25, 255, 125, 30), Some(rstr!("PLACEHOLDER"))) {
             showTextInputBox = true;
         }
 
@@ -519,12 +521,13 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         ) {
             multiTextBoxEditMode = !multiTextBoxEditMode;
         }
-        colorPickerValue = d.gui_color_picker(rrect(320, 185, 196, 192), colorPickerValue);
+        colorPickerValue = d.gui_color_picker(rrect(320, 185, 196, 192), Some(rstr!("PLACEHOLDER")), colorPickerValue);
 
         sliderValue = d.gui_slider(
             rrect(355, 400, 165, 20),
             Some(rstr!("TEST")),
-            Some(&rstr!("{:.2}", sliderValue as f32)),
+            // Some(&rstr!("{:.2}", sliderValue as f32)),
+            Some(rstr!("PLACEHOLDER")),
             sliderValue,
             -50.0,
             100.0,
@@ -532,7 +535,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         sliderBarValue = d.gui_slider_bar(
             rrect(320, 430, 200, 20),
             None,
-            Some(&rstr!("{}", sliderBarValue)),
+            // Some(&rstr!("{}", sliderBarValue)),
+            Some(rstr!("PLACEHOLDER")),
             sliderBarValue,
             0.0,
             100.0,
@@ -549,6 +553,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         // NOTE: View rectangle could be used to perform some scissor test
         let (_view, nextScroll) = d.gui_scroll_panel(
             rrect(560, 25, 100, 160),
+            Some(rstr!("PLACEHOLDER")),
             rrect(560, 25, 200, 400),
             viewScroll,
         );
@@ -559,7 +564,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             Some(rstr!("This is a status bar")),
         );
 
-        alphaValue = d.gui_color_bar_alpha(rrect(320, 490, 200, 30), alphaValue);
+        alphaValue = d.gui_color_bar_alpha(rrect(320, 490, 200, 30), Some(rstr!("PLACEHOLDER")), alphaValue);
 
         if showMessageBox {
             d.draw_rectangle(
@@ -569,7 +574,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                 d.get_screen_height(),
                 Color::RAYWHITE.fade(0.8),
             );
-            let itext = d.gui_icon_text(RAYGUI_ICON_EXIT, Some(rstr!("Close Window")));
+            let itext = d.gui_icon_text(GuiIconName::ICON_EXIT, Some(rstr!("Close Window")));
             let itext = CString::new(itext).unwrap();
             let result = d.gui_message_box(
                 rrect(
@@ -578,7 +583,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                     250,
                     100,
                 ),
-                Some(&itext),
+                Some(rstr!("Do you really want to exit?")),
                 Some(rstr!("Do you really want to exit?")),
                 Some(rstr!("Yes;No")),
             );
@@ -598,21 +603,24 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                 d.get_screen_height(),
                 Color::RAYWHITE.fade(0.8),
             );
-            let itext = unsafe { d.gui_icon_text(RAYGUI_ICON_FILE_SAVE, Some(rstr!("Save file as..."))) };
+            let itext = unsafe { d.gui_icon_text(GuiIconName::ICON_FILE_SAVE, Some(rstr!("Save file as..."))) };
             let itext = CString::new(itext).unwrap();
-            let result = d.gui_text_input_box(
+            let itext = rstr!("Save file as...");
+            let (result, _) = d.gui_text_input_box(
                 rrect(
                     d.get_screen_width() / 2 - 120,
                     d.get_screen_height() / 2 - 60,
                     240,
                     140,
                 ),
-                Some(&itext),
+                Some(itext),
                 Some(rstr!("Introduce a save file name")),
                 Some(rstr!("Ok;Cancel")),
                 &mut textInput,
+                200,
+                Some(false),
             );
-
+            
             if result == 1 {
                 // TODO: Validate textInput value and save
                 textInputFileName[..textInput.len()].clone_from_slice(&textInput);

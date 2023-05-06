@@ -250,8 +250,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         .unwrap();
 
     // Setup orbital camera
-    rl.set_camera_mode(camera, raylib::consts::CameraMode::CAMERA_ORBITAL); // Set an orbital camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
 
@@ -259,7 +257,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     return Box::new(move |rl: &mut RaylibHandle, thread: &RaylibThread| -> () {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera); // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE); // Update camera
 
         if rl.is_key_pressed(raylib::consts::KeyboardKey::KEY_RIGHT) {
             current_shader += 1;
