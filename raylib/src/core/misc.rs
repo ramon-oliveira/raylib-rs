@@ -43,13 +43,6 @@ impl RaylibHandle {
     }
 
     /// Returns a random value between min and max (both included)
-    /// ```rust
-    /// use raylib::misc::get_random_value;
-    /// fn main() {
-    ///     let (mut rl, thread) = ...;
-    ///     let r = rl.get_random_value(0, 10);
-    ///     println!("random value: {}", r);
-    /// }
     pub fn get_random_value<T: From<i32>>(&self, min: i32, max: i32) -> T {
         unsafe { (ffi::GetRandomValue(min, max) as i32).into() }
     }

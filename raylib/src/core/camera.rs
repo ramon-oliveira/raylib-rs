@@ -1,7 +1,7 @@
 //! Utility code for using Raylib [`Camera3D`] and [`Camera2D`]
+use crate::consts::CameraMode;
 use crate::core::math::{Vector2, Vector3};
 use crate::core::RaylibHandle;
-use crate::consts::CameraMode;
 use crate::ffi;
 
 #[repr(C)]
@@ -96,7 +96,6 @@ impl Camera3D {
 }
 
 impl RaylibHandle {
-    
     /// Updates camera position for selected mode.
     #[inline]
     pub fn update_camera(&self, camera: &mut Camera3D, mode: CameraMode) {

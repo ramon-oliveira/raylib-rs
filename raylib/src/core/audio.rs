@@ -54,7 +54,6 @@ impl RaylibAudio {
         }
     }
 
-
     /// Pauses a sound.
     #[inline]
     pub fn pause_sound(&mut self, sound: &Sound) {

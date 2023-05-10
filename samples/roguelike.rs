@@ -4,6 +4,7 @@
 /// IMHO Don't write code like this. Use ECS and other methods to have game objects and components.
 /// Only do this as an exercise.
 extern crate raylib;
+use crate::KeyboardKey::KEY_A;
 use rand::distributions::WeightedIndex;
 use rand::prelude::*;
 use rand::Rng;
@@ -14,7 +15,6 @@ use std::fs::File;
 use std::io::{Read, Write};
 use structopt::StructOpt;
 use tcod::map::{FovAlgorithm, Map as FovMap};
-use crate::KeyboardKey::KEY_A;
 
 mod options;
 

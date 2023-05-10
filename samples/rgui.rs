@@ -101,10 +101,8 @@ pub fn main() {
     while !exitWindow
     // Detect window close button or ESC key
     {
-
         use raylib::consts::GuiControl::*;
         use raylib::consts::GuiControlProperty::*;
-
 
         use raylib::consts::GuiTextAlignment::*;
 
