@@ -191,7 +191,6 @@ impl WindowState {
         self
     }
 
-
     pub fn window_highdpi(&self) -> bool {
         self.0 & (ffi::ConfigFlags::FLAG_WINDOW_HIGHDPI as i32) != 0
     }
@@ -620,9 +619,7 @@ impl RaylibHandle {
     #[inline]
     pub fn set_window_icons(&mut self, images: &mut [raylib_sys::Image]) {
         use std::convert::TryInto;
-        unsafe {
-            ffi::SetWindowIcons(images.as_mut_ptr(), images.len().try_into().unwrap())
-        }
+        unsafe { ffi::SetWindowIcons(images.as_mut_ptr(), images.len().try_into().unwrap()) }
     }
 
     /// Sets title for window (only on desktop platforms).
@@ -671,9 +668,7 @@ impl RaylibHandle {
     /// Set window opacity, value opacity is between 0.0 and 1.0
     #[inline]
     pub fn set_window_opacity(&mut self, opacity: f32) {
-        unsafe {
-            ffi::SetWindowOpacity(opacity)
-        }
+        unsafe { ffi::SetWindowOpacity(opacity) }
     }
 
     /// Get current render width which is equal to screen width * dpi scale
@@ -687,7 +682,7 @@ impl RaylibHandle {
     pub fn get_screen_width(&self) -> i32 {
         unsafe { ffi::GetScreenWidth() }
     }
-    
+
     /// Gets current screen height.
     #[inline]
     pub fn get_screen_height(&self) -> i32 {
