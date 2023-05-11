@@ -28,7 +28,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         45.0,
     );
 
-    let bill = rl.load_texture(thread, "original/models/resources/billboard.png").unwrap(); // Our texture billboard
+    let bill = rl
+        .load_texture(thread, "original/models/resources/billboard.png")
+        .unwrap(); // Our texture billboard
     let billPosition = rvec3(0.0, 2.0, 0.0); // Position where draw billboard
 
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second

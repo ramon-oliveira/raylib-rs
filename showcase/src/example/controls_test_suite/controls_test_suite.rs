@@ -2,7 +2,8 @@
 use raylib::prelude::*;
 use std::ffi::CString;
 #[allow(non_camel_case_types)]
-#[repr(u32)]pub enum guiIconName {
+#[repr(u32)]
+pub enum guiIconName {
     RICON_NONE,
     RICON_FOLDER_FILE_OPEN,
     RICON_FILE_SAVE_CLASSIC,
@@ -267,13 +268,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     // Initialization
     //---------------------------------------------------------------------------------------
     // #[cfg(target_os = "windows")] { // Macos has issues with high DPI
-        let screen_width = 690;
-        let screen_height = 560;
+    let screen_width = 690;
+    let screen_height = 560;
 
-        rl.set_window_size(screen_width, screen_height);
+    rl.set_window_size(screen_width, screen_height);
     // }
     rl.set_window_title(thread, "raygui - controls test suite");
-
 
     // GUI controls initialization
     //----------------------------------------------------------------------------------
