@@ -125,13 +125,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             {
 
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_model(&models[currentModel], position, 1.0, Color::WHITE);
-    
                     d.draw_grid(10, 1.0);
-    
             }
-
 
             d.draw_rectangle(30, 400, 310, 30, Color::SKYBLUE.fade( 0.5));
             d.draw_rectangle_lines(30, 400, 310, 30, Color::DARKBLUE.fade(0.5));

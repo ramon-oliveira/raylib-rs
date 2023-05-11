@@ -63,10 +63,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         d.draw_text("Press SPACE to play new ogg instance!", 200, 120, 20, Color::LIGHTGRAY);
         d.draw_text("Press ENTER to play new wav instance!", 200, 180, 20, Color::LIGHTGRAY);
 
-        let sounds_playing = {
-            audio.is_sound_playing(&fxWav) as usize 
-            + audio.is_sound_playing(&fxOgg) as usize
-        };
+        let sounds_playing = (audio.is_sound_playing(&fxWav) as usize) + (audio.is_sound_playing(&fxOgg) as usize);
+
         d.draw_text(&format!("CONCURRENT SOUNDS PLAYING: {:02}", sounds_playing), 220, 280, 20,Color::RED);
 
         //----------------------------------------------------------------------------------

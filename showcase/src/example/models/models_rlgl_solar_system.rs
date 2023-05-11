@@ -72,7 +72,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         let mut d = rl.begin_drawing(thread);
 
             d.clear_background(Color::RAYWHITE);
-
             {
                 let mut d = d.begin_mode3D(&camera);
 
@@ -104,16 +103,13 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                     ffi::rlPopMatrix();
 
                 }
-    
                     // Some reference elements (not affected by previous matrix transformations)
                     d.draw_circle_3D(rvec3( 0.0, 0.0, 0.0 ), earthOrbitRadius, rvec3( 1, 0,0 ), 90.0, Color::RED.fade( 0.5));
                     d.draw_grid(20, 1.0);
-    
             }
 
             d.draw_text("EARTH ORBITING AROUND THE SUN!", 400, 10, 20, Color::MAROON);
             d.draw_fps(10, 10);
-
     },
     );
 }

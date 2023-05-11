@@ -41,7 +41,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
         //----------------------------------------------------------------------------------
-
         // Draw
         //----------------------------------------------------------------------------------
         let mut d = rl.begin_drawing(thread);
@@ -50,19 +49,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         {
             let mut d = d.begin_mode3D(&camera);
-    
             d.draw_cube(cube_position, 2.0, 2.0, 2.0,Color::RED);
             d.draw_cube_wires(cube_position, 2.0, 2.0, 2.0, Color::MAROON);
-    
             d.draw_grid(10, 1.0);
-
         }
-
-
         d.draw_text("Welcome to the third dimension!", 10, 40, 20, Color::DARKGRAY);
-
         d.draw_fps(10, 10);
-
         //----------------------------------------------------------------------------------
     },
     );

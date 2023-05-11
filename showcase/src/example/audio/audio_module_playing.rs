@@ -118,16 +118,13 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         timePlayed = audio.get_music_time_played(&music) / audio.get_music_time_length(&music) * (screen_width - 40) as f32;
 
         // Color circles animation
-        for i in 0..MAX_CIRCLES 
-        {
+        for i in 0..MAX_CIRCLES  {
             circles[i].alpha += circles[i].speed;
             circles[i].radius += circles[i].speed * 10.0;
 
-            if circles[i].alpha > 1.0
-                {
-                    circles[i].speed *= -1.0;
-
-                }
+            if circles[i].alpha > 1.0 {
+                circles[i].speed *= -1.0;
+            }
 
             if circles[i].alpha <= 0.0
             {

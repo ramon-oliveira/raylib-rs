@@ -54,13 +54,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         {
 
             let mut d = d.begin_mode3D(&camera);
-    
             d.draw_grid(10, 1.0); // Draw a grid
-    
             d.draw_billboard(&camera, &bill, billPosition, 2.0, Color::WHITE);
         }
-
-
 
         d.draw_fps(10, 10);
 

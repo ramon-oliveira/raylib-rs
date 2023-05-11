@@ -148,20 +148,15 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                 d.clear_background(Color::WHITE);
                     let mut d = d.begin_vr_stereo_mode(&mut config);
                         let mut d = d.begin_mode3D(camera);
-        
                             d.draw_cube(cube_position, 2.0, 2.0, 2.0, Color::RED);
                             d.draw_cube_wires(cube_position, 2.0, 2.0, 2.0, Color::MAROON);
                             d.draw_grid(40, 1.0);
-        
-
         }
         {
-
             let mut d = d.begin_shader_mode(&distortion);
                 d.draw_texture_rec(target.texture(), rrect( 0, 0, target.texture().width,
                               -target.texture().height ), rvec2( 0.0, 0.0 ), Color::WHITE);
         }
-
         d.draw_fps(10, 10);
     },
     );

@@ -38,39 +38,30 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             dropped_files = rl.load_dropped_files();
         }
         //----------------------------------------------------------------------------------
-
         // Draw
         //----------------------------------------------------------------------------------
         {
 
             let mut d = rl.begin_drawing(thread);
-    
             d.clear_background(Color::RAYWHITE);
-    
             if dropped_files.len() == 0 {
-    
                 d.draw_text("Drop your files to this window!", 100, 40, 20, Color::DARKGRAY);
             }
             else
             {
                 d.draw_text("Dropped files:", 100, 40, 20, Color::DARKGRAY);
-    
                 for i in 0..dropped_files.len() as i32
                 {
                     if i % 2 == 0{
-    
                         d.draw_rectangle(0, 85 + 40 * i, screen_width, 40, Color::LIGHTGRAY.fade(0.5));
                     }
                     else {
                         d.draw_rectangle(0, 85 + 40 * i, screen_width, 40, Color::LIGHTGRAY.fade(0.3));
                     }
-    
                     d.draw_text(&dropped_files[i as usize], 120, 100 + 40 * i, 10, Color::GRAY);
                 }
-    
                 d.draw_text("Drop new files...", 100, 110 + 40 * dropped_files.len() as i32, 20, Color::DARKGRAY);
             }
-    
             //----------------------------------------------------------------------------------
         }
         if rl.is_key_down(crate::EXIT_KEY) {

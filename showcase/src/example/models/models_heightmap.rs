@@ -61,25 +61,17 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         // Draw
         //----------------------------------------------------------------------------------
         let mut d = rl.begin_drawing(thread);
-
             d.clear_background(Color::RAYWHITE);
-
             {
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_model(&model, mapPosition, 1.0, Color::RED);
-    
                     d.draw_grid(20, 1.0);
-    
-
             }
-
 
             d.draw_texture(&texture, screen_width - texture.width - 20, 20, Color::WHITE);
             d.draw_rectangle_lines(screen_width - texture.width - 20, 20, texture.width, texture.height, Color::GREEN);
 
             d.draw_fps(10, 10);
-
         //----------------------------------------------------------------------------------
         drop(d);
         if rl.is_key_pressed(crate::EXIT_KEY) {

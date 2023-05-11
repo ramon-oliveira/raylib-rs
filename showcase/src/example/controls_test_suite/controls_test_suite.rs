@@ -620,7 +620,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                 200,
                 Some(false),
             );
-            
+
             if result == 1 {
                 // TODO: Validate textInput value and save
                 textInputFileName[..textInput.len()].clone_from_slice(&textInput);

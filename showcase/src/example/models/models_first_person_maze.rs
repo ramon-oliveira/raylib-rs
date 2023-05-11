@@ -99,14 +99,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             d.clear_background(Color::RAYWHITE);
             {
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_model(&model, mapPosition, 1.0, Color::WHITE);                     // Draw maze map
                     //d.draw_cube_vplayerPosition, rvec3( 0.2f, 0.4,0.2f ), Color::RED);  // Draw player
-    
-
             }
-
-
             d.draw_texture_ex(&cubicmap, rvec2( d.get_screen_width() - cubicmap.width*4 - 20, 20.0 ), 0.0, 4.0, Color::WHITE);
             d.draw_rectangle_lines(d.get_screen_width() - cubicmap.width*4 - 20, 20, cubicmap.width*4, cubicmap.height*4, Color::GREEN);
 
@@ -114,7 +109,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             d.draw_rectangle(d.get_screen_width() - cubicmap.width*4 - 20 + playerCellX*4, 20 + playerCellY*4, 4, 4, Color::RED);
 
             d.draw_fps(10, 10);
-
         //----------------------------------------------------------------------------------
         drop(d);
         if rl.is_key_pressed(crate::EXIT_KEY) {

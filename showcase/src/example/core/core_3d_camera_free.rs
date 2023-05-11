@@ -53,12 +53,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         {
             let mut d = d.begin_mode3D(&camera);
-    
             d.draw_cube(cube_position, 2.0, 2.0, 2.0,Color::RED);
             d.draw_cube_wires(cube_position, 2.0, 2.0, 2.0, Color::MAROON);
-    
             d.draw_grid(10, 1.0);
-
         }
 
 

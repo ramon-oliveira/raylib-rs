@@ -65,15 +65,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
             {
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_plane(rvec3(0.0, 0.0, 0.0), rvec2(32.0, 32.0), Color::LIGHTGRAY); // Draw ground
                     d.draw_cube(rvec3(16.0, 2.5, 0.0), 1.0, 5.0, 32.0, Color::BLUE);     // Draw a blue wall
                     d.draw_cube(rvec3(16.0, 2.5, 0.0), 1.0, 5.0, 32.0, Color::LIME);      // Draw a green wall
                     d.draw_cube(rvec3(0.0, 2.5, 16.0), 32.0, 5.0, 1.0, Color::GOLD);      // Draw a yellow wall
-    
                     // Draw some cubes around
-                    for i in 0..MAX_COLUMNS
-                    {
+                    for i in 0..MAX_COLUMNS {
                         d.draw_cube(positions[i], 2.0, heights[i], 2.0, colors[i]);
                         d.draw_cube_wires(positions[i], 2.0, heights[i], 2.0, Color::MAROON);
                     }

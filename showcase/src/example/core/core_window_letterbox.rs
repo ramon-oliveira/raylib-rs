@@ -90,11 +90,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         d.clear_background(Color::RAYWHITE); // Clear render texture background color
 
-        for i in 0..10 
-            {
-                d.draw_rectangle(0, (game_screen_height / 10) * i, game_screen_width, game_screen_height / 10, colors[i as usize]);
-
-            }
+        for i in 0..10 {
+            d.draw_rectangle(0, (game_screen_height / 10) * i, game_screen_width, game_screen_height / 10, colors[i as usize]);
+        }
 
         d.draw_text("If executed inside a window,\nyou can resize the window,\nand see the screen scaling!", 10, 25, 20, Color::WHITE);
 

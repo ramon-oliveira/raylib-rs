@@ -66,27 +66,19 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             d.clear_background(Color::RAYWHITE);
 
             {
-
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_cube(rvec3(-4.0, 0.0,2.0), 2.0, 5.0, 2.0, Color::RED);
                     d.draw_cube_wires(rvec3(-4.0, 0.0,2.0), 2.0, 5.0, 2.0, Color::GOLD);
                     d.draw_cube_wires(rvec3(-4.0, 0.0,-2.0), 3.0, 6.0, 2.0, Color::MAROON);
-    
                     d.draw_sphere(rvec3(-1.0, 0.0,-2.0), 1.0, Color::GREEN);
                     d.draw_sphere_wires(rvec3(1.0, 0.0,2.0), 2.0, 16, 16, Color::LIME);
-    
                     d.draw_cylinder(rvec3(4.0, 0.0,-2.0), 1.0, 2.0, 3.0, 4, Color::SKYBLUE);
                     d.draw_cylinder_wires(rvec3(4.0, 0.0,-2.0), 1.0, 2.0, 3.0, 4, Color::DARKBLUE);
                     d.draw_cylinder_wires(rvec3(4.5, -1.0,2.0), 1.0, 1.0, 2.0, 6, Color::BROWN);
-    
                     d.draw_cylinder(rvec3(1.0, 0.0,-4.0), 0.0, 1.5, 3.0, 8, Color::GOLD);
                     d.draw_cylinder_wires(rvec3(1.0, 0.0,-4.0), 0.0, 1.5, 3.0, 8, Color::PINK);
-    
                     d.draw_grid(10, 1.0);        // Draw a grid
-    
             }
-
 
             d.draw_text("Press Spacebar to switch camera type", 10, d.get_screen_height() - 30, 20, Color::DARKGRAY);
 

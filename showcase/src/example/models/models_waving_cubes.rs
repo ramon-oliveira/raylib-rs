@@ -52,55 +52,37 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         camera.position.x = (cameraTime).cos()*40.0;
         camera.position.z = (cameraTime).sin()*40.0;
         //----------------------------------------------------------------------------------
-        
         // Draw
         //----------------------------------------------------------------------------------
         let mut d = rl.begin_drawing(thread);
-
             d.clear_background(Color::RAYWHITE);
-
             {
-
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_grid(10, 5.0);
-    
-                    for x in 0..numBlocks
-                    {
-                        for y in 0..numBlocks 
-                        {
-                            for z in 0..numBlocks 
-                            {
-                                
+                    for x in 0..numBlocks {
+                        for y in 0..numBlocks {
+                            for z in 0..numBlocks {
                                 // Scale of the blocks depends on x/y/z positions
                                 let blockScale = (x as f32 + y as f32 + z as f32)/30.0;
-    
                                 // Scatter makes the waving effect by adding blockScale over time
                                 let scatter = (blockScale*20.0 + time*4.0).sin();
-    
                                 // Calculate the cube position
                                 let cubePos = rvec3(
                                     (x - numBlocks/2) as f32 *(scale*3.0) + scatter,
                                     (y - numBlocks/2) as f32 *(scale*2.0) + scatter,
                                     (z - numBlocks/2) as f32 *(scale*3.0) + scatter
                                 );
-    
                                 // Pick a color with a hue depending on cube position for the rainbow color effect
                                 let cubeColor = Color::color_from_hsv( (((x + y + z)*18)%360) as f32, 0.75,0.9 );
-    
                                 // Calculate cube size
                                 let cubeSize = (2.4 - scale)*blockScale;
-    
                                 // And finally, draw the cube!
                                 d.draw_cube(cubePos, cubeSize, cubeSize, cubeSize, cubeColor);
                             }
                         }
                     }
-                    
             }
-            
             d.draw_fps(10, 10);
-
         //----------------------------------------------------------------------------------
     },
     );

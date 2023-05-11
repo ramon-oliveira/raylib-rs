@@ -70,29 +70,23 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         // Update
         //----------------------------------------------------------------------------------
         rl.update_camera(&mut camera, CameraMode::CAMERA_FREE);
-        
         // Load new models/textures on drag&drop
         if (rl.is_file_dropped())
         {
             let droppedFiles = rl.load_dropped_files();
-
             if (droppedFiles.len() == 1) // Only support one file dropped
             {
                 if Path::new(&droppedFiles[0]).extension().map_or(false, |ext| {
                     return ext == "obj" ||
                         ext == "gltf" ||
                         ext == "iqm"       // Model file formats supported
-                    
-                }) 
-                {
+                }) {
                     model = rl.load_model(thread, &droppedFiles[0]).unwrap();     // Load new model
                     model.materials_mut()[0].maps_mut()[raylib::consts::MaterialMapIndex::MATERIAL_MAP_ALBEDO as usize].texture = *texture.as_ref(); // Set current map diffuse texture
 
                     bounds = model.meshes()[0].get_mesh_bounding_box();
-                    
                     // TODO: Move camera position from target enough distance to visualize model properly
-                }
-                else if Path::new(&droppedFiles[0]).extension().map_or(false, |ext| { ext == "png"})  // Texture file formats supported
+                } else if Path::new(&droppedFiles[0]).extension().map_or(false, |ext| { ext == "png"})  // Texture file formats supported
                 {
                     // Unload current model texture and load new one
                     texture = rl.load_texture(thread, &droppedFiles[0]).unwrap();
@@ -118,27 +112,20 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         let mut d = rl.begin_drawing(thread);
 
             d.clear_background(Color::RAYWHITE);
-
             {
 
                 let mut d = d.begin_mode3D(&camera);
-    
                     d.draw_model(&model, position, 1.0, Color::WHITE);        // Draw 3d model with texture
-    
                     d.draw_grid(20, 10.0);         // Draw a grid
-    
                     if (selected) {d.draw_bounding_box(bounds, Color::GREEN);}   // Draw selection box
-    
             }
 
-            
             d.draw_text("Drag & drop model to load mesh/texture.", 10, d.get_screen_height() - 20, 10, Color::DARKGRAY);
             if (selected){ d.draw_text("MODEL SELECTED", d.get_screen_width() - 110, 10, 10, Color::GREEN);}
 
             d.draw_text("(c) Castle 3D model by Alberto Cano", screen_width - 200, screen_height - 20, 10, Color::GRAY);
 
             d.draw_fps(10, 10);
-
         //----------------------------------------------------------------------------------
     },
     );

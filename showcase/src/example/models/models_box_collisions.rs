@@ -59,8 +59,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         collision = false;
 
         // Check collisions player vs enemy-box
-        if 
-            BoundingBox::new(rvec3( playerPosition.x - playerSize.x/2.0,
+        if BoundingBox::new(rvec3( playerPosition.x - playerSize.x/2.0,
                                      playerPosition.y - playerSize.y/2.0,
                                      playerPosition.z - playerSize.z/2.0 ),
                           rvec3( playerPosition.x + playerSize.x/2.0,
@@ -74,8 +73,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                                      enemyBoxPos.z + enemyBoxSize.z/2.0 ))) {collision = true;}
 
         // Check collisions player vs enemy-sphere
-        if 
-            BoundingBox::new(rvec3( playerPosition.x - playerSize.x/2.0,
+        if BoundingBox::new(rvec3( playerPosition.x - playerSize.x/2.0,
                                      playerPosition.y - playerSize.y/2.0,
                                      playerPosition.z - playerSize.z/2.0 ),
                           rvec3( playerPosition.x + playerSize.x/2.0,
@@ -86,7 +84,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         if (collision){ playerColor = Color::RED;}
         else {playerColor = Color::GREEN;}
         //----------------------------------------------------------------------------------
-
         // Draw
         //----------------------------------------------------------------------------------
         let mut d = rl.begin_drawing(thread);
@@ -94,21 +91,16 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             d.clear_background(Color::RAYWHITE);
 
             {
-
                 let mut d = d.begin_mode3D(&camera);
-    
-                    // Draw enemy-box
-                    d.draw_cube(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, Color::GRAY);
-                    d.draw_cube_wires(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, Color::DARKGRAY);
-    
-                    // Draw enemy-sphere
-                    d.draw_sphere(enemySpherePos, enemySphereSize, Color::GRAY);
-                    d.draw_sphere_wires(enemySpherePos, enemySphereSize, 16, 16, Color::DARKGRAY);
-    
-                    // Draw player
-                    d.draw_cube_v(playerPosition, playerSize, playerColor);
-    
-                    d.draw_grid(10, 1.0);        // Draw a grid
+                // Draw enemy-box
+                d.draw_cube(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, Color::GRAY);
+                d.draw_cube_wires(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, Color::DARKGRAY);
+                // Draw enemy-sphere
+                d.draw_sphere(enemySpherePos, enemySphereSize, Color::GRAY);
+                d.draw_sphere_wires(enemySpherePos, enemySphereSize, 16, 16, Color::DARKGRAY);
+                // Draw player
+                d.draw_cube_v(playerPosition, playerSize, playerColor);
+                d.draw_grid(10, 1.0);        // Draw a grid
             }
 
             d.draw_text("Move player with cursors to collide", 220, 40, 20, Color::GRAY);

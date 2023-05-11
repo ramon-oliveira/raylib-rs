@@ -88,10 +88,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
             if droppedFiles.len() == 1
             {
-
-                if let Ok(imTemp) = Image::load_image(&droppedFiles[0]) 
-
-                {
+                if let Ok(imTemp) = Image::load_image(&droppedFiles[0]) {
                     image = imTemp;
 
                     texture = rl.load_texture_from_image(thread, &image).unwrap();
@@ -99,20 +96,15 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                     imageLoaded = true;
                     pixelFormatActive = image.format - 1;
 
-                    if texture.height() > texture.width()
-                        {
-
-                            imageScale = (screen_height - 100) as f32 / texture.height() as f32;
-                        }
-                    else
-                        {
-                            imageScale = (screen_width - 100) as f32 / texture.width() as f32;
-                        }
+                    if texture.height() > texture.width() {
+                        imageScale = (screen_height - 100) as f32 / texture.height() as f32;
+                    } else {
+                        imageScale = (screen_width - 100) as f32 / texture.width() as f32;
+                    }
                 }
             }
-
-            // rl.unload_dropped_files();
-            rl.load_dropped_files();
+            // rl.unload_dropped_files(&droppedFiles);
+            // rl.load_dropped_files();
         }
 
         if btnExport
@@ -130,15 +122,12 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                         }
                     let exportName = bytes_to_str(&fileName);
                     image.export_image(exportName);
-                }
-                else if fileFormatActive == 1 // RAW
-                {
-                    if Path::new(&fileNameStr).extension().map_or(true, |e| e != "raw")
-                        {
-                            let next = format!("{}.raw", &fileNameStr);
-                            fileName[..next.len()].copy_from_slice(next.as_bytes()); // No extension providedsdw
-                        }
-                    
+                } else if fileFormatActive == 1 { // RAW
+                    if Path::new(&fileNameStr).extension().map_or(true, |e| e != "raw") {
+                        let next = format!("{}.raw", &fileNameStr);
+                        fileName[..next.len()].copy_from_slice(next.as_bytes()); // No extension providedsdw
+                    }
+
                     let fileNameTemp = bytes_to_str(&fileName);
                     let dataSize = image.get_pixel_data_size();
                     let mut file = File::create(fileNameTemp).expect("failed to open raw file");

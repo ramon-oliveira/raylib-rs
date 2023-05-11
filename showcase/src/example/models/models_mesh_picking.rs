@@ -117,7 +117,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
             // Check ray collision against model
             // NOTE: It considers model.transform matrix!
-            
             // TODO FIX FUNCTION CALL
             // meshHitInfo = get_ray_collision_model(ray, &tower, &tower.transform);
 
@@ -131,7 +130,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
         hitMeshBBox = false;
         //----------------------------------------------------------------------------------
-
         // Draw
         //----------------------------------------------------------------------------------
         let mut d = rl.begin_drawing(thread);
@@ -139,40 +137,30 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             d.clear_background(Color::RAYWHITE);
 
             {
-
                 let mut d = d.begin_mode3D(&camera);
-    
                     // Draw the tower
                     // WARNING: If scale is different than 1.0,
                     // not considered by GetCollisionRayModel()
                     d.draw_model(&tower, towerPos, 1.0, Color::WHITE);
-    
                     // Draw the test triangle
                     d.draw_line_3D(ta, tb, Color::PURPLE);
                     d.draw_line_3D(tb, tc, Color::PURPLE);
                     d.draw_line_3D(tc, ta, Color::PURPLE);
-    
                     // Draw the mesh bbox if we hit it
                     if (hitMeshBBox){ d.draw_bounding_box(towerBBox, Color::LIME);}
-    
                     // If we hit something, draw the cursor at the hit point
                     if (nearestHit.hit)
                     {
                         d.draw_cube(nearestHit.point, 0.3, 0.3, 0.3, cursorColor);
                         d.draw_cube_wires(nearestHit.point, 0.3, 0.3, 0.3, Color::RED);
-    
                         let mut normalEnd = Vector3::default();
                         normalEnd.x = nearestHit.point.x + nearestHit.normal.x;
                         normalEnd.y = nearestHit.point.y + nearestHit.normal.y;
                         normalEnd.z = nearestHit.point.z + nearestHit.normal.z;
-    
                         d.draw_line_3D(nearestHit.point, normalEnd, Color::RED);
                     }
-    
                     d.draw_ray(ray, Color::MAROON);
-    
                     d.draw_grid(10, 10.0);
-    
             }
 
             // Draw some debug GUI text
@@ -198,11 +186,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             }
 
             d.draw_text("Use Mouse to Move Camera", 10, 430, 10, Color::GRAY);
-
             d.draw_text("(c) Turret 3D model by Alberto Cano", screen_width - 200, screen_height - 20, 10, Color::GRAY);
-
             d.draw_fps(10, 10);
-
         //----------------------------------------------------------------------------------
     },
     );

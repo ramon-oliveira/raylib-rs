@@ -72,7 +72,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
             rl.set_window_position(windowPosition.x as i32, windowPosition.y as i32);
         }
         //----------------------------------------------------------------------------------
-
         // Draw
         //----------------------------------------------------------------------------------
         let mut d = rl.begin_drawing(thread);
@@ -84,7 +83,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         d.draw_text(&format!("Mouse Position: [ {:.0}, {:.0} ]", mousePosition.x, mousePosition.y), 10, 40, 10, Color::DARKGRAY);
 
         //----------------------------------------------------------------------------------
- 
     },
     );
 }
