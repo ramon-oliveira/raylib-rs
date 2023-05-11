@@ -32,7 +32,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     );
 
     let image = Image::load_image("original/models/resources/cubicmap.png").unwrap(); // Load cubicmap image (RAM)
-    let cubicmap =  rl.load_texture_from_image(thread, &image).unwrap(); // Convert image to texture to display (VRAM)
+    let cubicmap = rl.load_texture_from_image(thread, &image).unwrap(); // Convert image to texture to display (VRAM)
 
     // Because model depends on mesh, we have to make sure mesh lives as long as the model. We make it weak
     // to manually control it's lifespan.
@@ -42,52 +42,39 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     // NOTE: By default each cube is mapped to one part of texture atlas
     // make texture weak so it lives as long as the model
     let texture = unsafe {
-        rl
-            .load_texture(thread, "original/models/resources/cubicmap_atlas.png")
-            .unwrap().make_weak() // Load map texture
-            
-        }; 
-        model.materials_mut()[0].maps_mut()[raylib::consts::MaterialMapIndex::MATERIAL_MAP_ALBEDO as usize]
+        rl.load_texture(thread, "original/models/resources/cubicmap_atlas.png")
+            .unwrap()
+            .make_weak() // Load map texture
+    };
+    model.materials_mut()[0].maps_mut()
+        [raylib::consts::MaterialMapIndex::MATERIAL_MAP_ALBEDO as usize]
         .texture = *texture.as_ref(); // Set map diffuse texture
     let mapPosition = rvec3(-16.0, 0.0, -8.0); // Set model position
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_ORBITAL); // Set an orbital camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
-
-    // Main game loop
+                           // Main game loop
     return Box::new(
         move |rl: &mut RaylibHandle, thread: &RaylibThread| -> ()            // Detect window close button or ESC key
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera);              // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_ORBITAL);              // Update camera
         //----------------------------------------------------------------------------------
-
         {
             // Draw
             //----------------------------------------------------------------------------------
             let mut d = rl.begin_drawing(thread);
-    
                 d.clear_background(Color::RAYWHITE);
-    
                 {
                     let mut d = d.begin_mode3D(&camera);
-        
                         d.draw_model(&model, mapPosition, 1.0, Color::WHITE);
-    
                 }
-    
-    
                 d.draw_texture_ex(&cubicmap, rvec2( screen_width - cubicmap.width*4 - 20, 20 ), 0.0, 4.0, Color::WHITE);
                 d.draw_rectangle_lines(screen_width - cubicmap.width*4 - 20, 20, cubicmap.width*4, cubicmap.height*4, Color::GREEN);
-    
                 d.draw_text("cubicmap image used to", 658, 90, 10, Color::GRAY);
                 d.draw_text("generate map 3d model", 658, 104, 10, Color::GRAY);
-    
                 d.draw_fps(10, 10);
-    
             //----------------------------------------------------------------------------------
         }
         if rl.is_key_pressed(crate::EXIT_KEY) {

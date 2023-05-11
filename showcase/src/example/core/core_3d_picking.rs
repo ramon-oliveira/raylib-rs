@@ -35,11 +35,8 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
 
     let mut collision = false;
 
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_FREE); // Set a free camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
-
 
     // Main game loop
     return Box::new(
@@ -47,7 +44,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera); // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_FREE); // Update camera
 
         if rl.is_mouse_button_pressed(raylib::consts::MouseButton::MOUSE_BUTTON_LEFT)
         {
@@ -73,14 +70,11 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         d.clear_background(Color::RAYWHITE);
 
         {
-
             let mut d = d.begin_mode3D(&camera);
-    
             if collision
             {
                 d.draw_cube(cube_position, cube_size.x, cube_size.y, cube_size.z,Color::RED);
                 d.draw_cube_wires(cube_position, cube_size.x, cube_size.y, cube_size.z, Color::MAROON);
-    
                 d.draw_cube_wires(cube_position, cube_size.x + 0.2, cube_size.y + 0.2, cube_size.z + 0.2, Color::GREEN);
             }
             else
@@ -88,23 +82,20 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
                 d.draw_cube(cube_position, cube_size.x, cube_size.y, cube_size.z, Color::GRAY);
                 d.draw_cube_wires(cube_position, cube_size.x, cube_size.y, cube_size.z, Color::DARKGRAY);
             }
-    
+
             d.draw_ray(ray, Color::MAROON);
             d.draw_grid(10, 1.0);
         }
-
 
         d.draw_text("Try selecting the box with mouse!", 240, 10, 20, Color::DARKGRAY);
 
         if collision {
             d.draw_text("BOX SELECTED", (screen_width  - raylib::text::measure_text("BOX SELECTED", 30)) / 2, (screen_height as f32 * 0.1) as i32, 30, Color::GREEN);
-
         }
 
         d.draw_fps(10, 10);
 
         //----------------------------------------------------------------------------------
-    }
+    },
     );
-    
 }

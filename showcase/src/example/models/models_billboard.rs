@@ -28,10 +28,10 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         45.0,
     );
 
-    let bill = rl.load_texture(thread, "original/models/resources/billboard.png").unwrap(); // Our texture billboard
+    let bill = rl
+        .load_texture(thread, "original/models/resources/billboard.png")
+        .unwrap(); // Our texture billboard
     let billPosition = rvec3(0.0, 2.0, 0.0); // Position where draw billboard
-
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_ORBITAL); // Set an orbital camera mode
 
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
     {
         // Update
         //----------------------------------------------------------------------------------
-        rl.update_camera(&mut camera); // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_ORBITAL); // Update camera
                                //----------------------------------------------------------------------------------
 
         // Draw
@@ -54,13 +54,9 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         {
 
             let mut d = d.begin_mode3D(&camera);
-    
             d.draw_grid(10, 1.0); // Draw a grid
-    
             d.draw_billboard(&camera, &bill, billPosition, 2.0, Color::WHITE);
         }
-
-
 
         d.draw_fps(10, 10);
 

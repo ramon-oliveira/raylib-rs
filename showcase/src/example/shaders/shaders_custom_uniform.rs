@@ -79,9 +79,6 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         .load_render_texture(thread, screen_width as u32, screen_height as u32)
         .unwrap();
 
-    // Setup orbital camera
-    rl.set_camera_mode(&camera, raylib::consts::CameraMode::CAMERA_ORBITAL); // Set an orbital camera mode
-
     rl.set_target_fps(60); // Set our game to run at 60 frames-per-second
                            //--------------------------------------------------------------------------------------
 
@@ -100,7 +97,7 @@ pub fn run(rl: &mut RaylibHandle, thread: &RaylibThread) -> crate::SampleOut {
         // Send new value to the shader to be used on drawing
         shader.set_shader_value( swirlCenterLoc, swirlCenter);
 
-        rl.update_camera(&mut camera); // Update camera
+        rl.update_camera(&mut camera, CameraMode::CAMERA_ORBITAL); // Update camera
         //----------------------------------------------------------------------------------
 {
         // Draw
